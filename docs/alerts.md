@@ -11,7 +11,7 @@ Mỗi alert phải dựa trên triệu chứng người dùng hoặc SLO, không
 - Ảnh hưởng tới người dùng:
 - Ba bước kiểm tra đầu tiên:
 - Mitigation tạm thời:
-- Owner:
+- Owner::
 
 ## Alert 2
 
