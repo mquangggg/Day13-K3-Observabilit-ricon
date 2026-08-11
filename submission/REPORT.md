@@ -31,10 +31,20 @@
 
 ## 5. Dashboard, SLO và alerts
 
-- Kết quả `validate_dashboard.py`:
-- Evidence dashboard:
+- Kết quả `validate_dashboard.py`: HỢP LỆ: 6/6 panel có trong dashboard contract.
+- Evidence dashboard: Nguồn dữ liệu từ `data/logs.jsonl` bao gồm 6 panels tiêu chuẩn:
+  1. Latency Percentiles (P50, P95, P99 - ms) với threshold P95 <= 3000ms.
+  2. Request Traffic (count & req/min) với threshold >= 1 req/min.
+  3. Error Rate & Breakdown (%) với threshold Error Rate <= 2%.
+  4. Cost Over Time (USD) với threshold Total <= $2.5.
+  5. Input & Output Tokens với threshold <= 50,000 tokens.
+  6. Quality Proxy (Quality Score 0-1) với threshold Mean >= 0.75.
 - SLO đã chọn và lý do:
+  - Latency SLO: P95 Latency <= 3000ms. Lý do: Đảm bảo trải nghiệm RAG/LLM cho người dùng không bị nghẽn (xuất hiện phản hồi dưới 3 giây).
+  - Availability/Error Rate SLO: Error Rate <= 2%. Lý do: Giữ cho hệ thống agent ổn định, tỉ lệ lỗi hệ thống/LLM không vượt quá ngưỡng cho phép.
 - Alert rules và runbook:
+  - Alert 1: High Latency Alert (P95 > 3000ms trong 5 phút). Runbook: Kiểm tra RAG retrieval duration và LLM response time trên Langfuse trace waterfall. Nếu do RAG retry, kiểm tra kết nối vector store/RAG incident mock.
+  - Alert 2: High Error Rate Alert (Error Rate > 2% trong 5 phút). Runbook: Lọc `data/logs.jsonl` theo `event == "request_failed"`, tìm `error_type` chính và xem `correlation_id` tương ứng trên Langfuse để xác định nguyên nhân crash.
 
 ## 6. Điều tra challenge
 
