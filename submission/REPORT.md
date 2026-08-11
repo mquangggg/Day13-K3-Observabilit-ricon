@@ -21,7 +21,7 @@
 
 - Evidence correlation ID: Tất cả các API request đều được gán `correlation_id` chuẩn dạng `req-<8-char-hex>` (ví dụ: `req-03c236aa`) truyền qua response header `x-request-id` và ghi đồng bộ trong `data/logs.jsonl`.
 - Evidence PII redaction: Đã kích hoạt processor `scrub_event` trong `logging_config.py` và hàm `scrub_obj` trong `pii.py`. Tất cả Email, SĐT, CCCD, Số thẻ được thay thế bằng các token dạng `[REDACTED_EMAIL]`, `[REDACTED_PHONE_VN]`, v.v.
-- Evidence trace waterfall: [trace_waterfall.png](evidence/trace_waterfall.png)
+- Evidence trace waterfall:
 - Giải thích một span đáng chú ý:
 
 ## 4. Prompt versioning
@@ -53,7 +53,7 @@
 
 ## 6. Điều tra challenge
 
-- Challenge ID: `day13-k3-observability-v1`
+- Challenge ID: day13-k3-observability-v1
 - Triệu chứng từ metrics: P95 Latency của feature `refund` bùng nổ lên tới 12,500ms - 15,200ms (vượt xa ngưỡng SLO 3,000ms).
 - Trace ID liên quan: `req-8bc9c46b`, `req-2ae12e55`, `req-ebae43d7`, `req-f646b30a`, `req-59fc8772`
 - Log line/correlation ID liên quan: `req-8bc9c46b` (Latency: 12545.2ms, `user_id_hash`: `026c7a407135`, feature: `refund`)
@@ -66,5 +66,5 @@
 | Thành viên | Phần việc | Commit/PR | Điều đã học |
 |---|---|---|---|
 | Vũ Minh Quang | Triển khai Correlation ID middleware, PII Redaction & Structured Logging | Commit `272dcba`, PR merge main | Hiểu rõ cơ chế propagation Correlation ID & PII scrubbing trong Structlog |
-| Phạm Trung Kiên (TV2) | Tích hợp Tracing, Prompt Versioning & Rollback | Commit `78f4801`, PR merge main | Cách quản lý Prompt Versioning và truy vết Span trên Langfuse |
+| Phạm Trung Kiên | Tích hợp Tracing & Prompt Versioning | Commit `78f4801`, PR merge main | Cách quản lý Prompt Versioning và truy vết Span trên Langfuse |
 | Lương Ngọc Quang | Cấu hình Alerts, Dashboard Contract & Runbook | Commit `be61e1c`, PR merge main | Thiết lập SLO/Alert thresholds và xây dựng Dashboard contract từ logs.jsonl |
