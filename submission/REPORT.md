@@ -40,13 +40,13 @@
 
 ## 6. Điều tra challenge
 
-- Challenge ID:
-- Triệu chứng từ metrics:
-- Trace ID liên quan:
-- Log line/correlation ID liên quan:
-- Root cause:
-- Fix action:
-- Preventive measure:
+- Challenge ID: `day13-k3-observability-v1`
+- Triệu chứng từ metrics: Latency tăng vọt lên ~13,280 ms (vượt xa ngưỡng `latency_threshold_ms: 2000` ms) tập trung ở feature `refund`.
+- Trace ID liên quan: `bc0300dde7832a3a903b66808a0a5155`
+- Log line/correlation ID liên quan: `correlation_id` dạng `req-a13b9acd` (xác nhận trong `data/logs.jsonl` có event `response_sent` với latency vượt quá 10,000 ms).
+- Root cause: Incident `rag_slow` kích hoạt làm nghẽn hàm `retrieve()` trong RAG module (`mock_rag.py`), gây delay 2.5s cho mỗi lần gọi retrieval và làm tích tụ độ trễ dưới tải đồng thời (concurrency = 5).
+- Fix action: Tắt incident bằng cách gọi API `POST /incidents/rag_slow/disable` hoặc sửa tối ưu thời gian phản hồi của RAG service.
+- Preventive measure: Cấu hình timeout cho bước RAG retrieval (ví dụ max timeout 1.0s kèm fallback cache/default context) và thiết lập Alert rule cảnh báo khi P95 RAG latency > 1500ms.
 
 ## 7. Đóng góp cá nhân
 
@@ -54,4 +54,4 @@ Với mỗi thành viên, ghi rõ nhiệm vụ và link commit/PR tương ứng.
 
 | Thành viên | Phần việc | Commit/PR | Điều đã học |
 |---|---|---|---|
-| | | | |
+| Phạm Trung Kiên (TV2) | Langfuse Tracing, Prompt Versioning & Rollback, Correlation ID trong Trace, Điều tra Challenge Traces | [phamkien branch](https://github.com/mquangggg/Day13-K3-Observabilit-ricon/tree/phamkien) | Cách quản lý phiên bản Prompt trên Langfuse Cloud, kết nối Traces → Logs qua correlation_id, phân tích waterfall trace để tìm nghẽn RAG. |
