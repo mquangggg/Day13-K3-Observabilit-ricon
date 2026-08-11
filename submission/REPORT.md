@@ -2,17 +2,20 @@
 
 ## 1. Thông tin nhóm
 
-- Tên nhóm:
-- Repository URL:
-- Commit SHA cuối:
+- Tên nhóm: ri con
+- Repository URL: https://github.com/mquangggg/Day13-K3-Observabilit-ricon
+- Commit SHA cuối: 1b74e47c53a61d61ce50f5752255a45190d21767
 - Thành viên và vai trò:
+  - Vũ Minh Quang 2A202601515 (Thành viên 1): Logging, Metadata & PII Redaction
+  - Phạm Trung Kiên 2A202601525 (Thành viên 2): Tracing & Prompt Versioning (Langfuse)
+  - Lương Ngọc Quang 2A202601563 (Thành viên 3): Dashboard, SLO, Alerting & Runbook
 
 ## 2. Kết quả kỹ thuật
 
 - Điểm `validate_logs.py`: 100/100
 - Tổng số traces:
 - Số PII leak còn lại: 0
-- Link/đường dẫn dashboard:
+- Link/đường dẫn dashboard: `config/dashboard.yaml` / `data/logs.jsonl`
 
 ## 3. Logging và tracing
 
@@ -60,8 +63,9 @@
 
 ## 7. Đóng góp cá nhân
 
-Với mỗi thành viên, ghi rõ nhiệm vụ và link commit/PR tương ứng.
-
 | Thành viên | Phần việc | Commit/PR | Điều đã học |
 |---|---|---|---|
-| | | | |
+| Vũ Minh Quang | Triển khai Correlation ID middleware, PII Redaction & Structured Logging | Commit `272dcba`, PR merge main | Hiểu rõ cơ chế propagation Correlation ID & PII scrubbing trong Structlog |
+| Phạm Kiên | Tích hợp Tracing & Prompt Versioning | Commit `78f4801`, PR merge main | Cách quản lý Prompt Versioning và truy vết Span trên Langfuse |
+| Quang LN | Cấu hình Alerts, Dashboard Contract & Runbook | Commit `be61e1c`, PR merge main | Thiết lập SLO/Alert thresholds và xây dựng Dashboard contract từ logs.jsonl |
+
