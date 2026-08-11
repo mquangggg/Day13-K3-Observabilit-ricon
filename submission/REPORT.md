@@ -27,8 +27,8 @@
 - Version/label baseline: Version 1 (label: `baseline`, `production`)
 - Version/label candidate: Version 2 (label: `candidate`, `production`)
 - Trace ID của mỗi version: 
-  - Trace ID (Version 1): `6b1d0b6d64a6251283b335484bb41504`
-  - Trace ID (Version 2): `06d42653e692ebb60a76c9acb3eef6bf`
+  - Trace ID (Version 1): `bc0300dde7832a3a903b66808a0a5155`
+  - Trace ID (Version 2): `3aea8bac0db8b383d92b764e71ea163c`
 - Bằng chứng đổi label hoặc rollback: [prompt_versioning.png](evidence/prompt_versioning.png)
 
 ## 5. Dashboard, SLO và alerts
