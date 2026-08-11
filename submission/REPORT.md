@@ -13,7 +13,7 @@
 ## 2. Kết quả kỹ thuật
 
 - Điểm `validate_logs.py`: 100/100
-- Tổng số traces:
+- Tổng số traces: 49
 - Số PII leak còn lại: 0
 - Link/đường dẫn dashboard: `config/dashboard.yaml` / `data/logs.jsonl`
 
@@ -21,8 +21,8 @@
 
 - Evidence correlation ID: Tất cả các API request đều được gán `correlation_id` chuẩn dạng `req-<8-char-hex>` (ví dụ: `req-03c236aa`) truyền qua response header `x-request-id` và ghi đồng bộ trong `data/logs.jsonl`.
 - Evidence PII redaction: Đã kích hoạt processor `scrub_event` trong `logging_config.py` và hàm `scrub_obj` trong `pii.py`. Tất cả Email, SĐT, CCCD, Số thẻ được thay thế bằng các token dạng `[REDACTED_EMAIL]`, `[REDACTED_PHONE_VN]`, v.v.
-- Evidence trace waterfall:
-- Giải thích một span đáng chú ý:
+- Evidence trace waterfall: [trace_waterfall.png](evidence/trace_waterfall.png)
+- Giải thích một span đáng chú ý: Span `retrieve_docs` trong request `req-8bc9c46b` kéo dài tới 12,545ms (chiếm hơn 90% tổng latency request) do sự cố `rag_slow` làm dịch vụ RAG Retrieval bị nghẽn và lặp lại retry.
 
 ## 4. Prompt versioning
 
