@@ -9,15 +9,15 @@
 
 ## 2. Kết quả kỹ thuật
 
-- Điểm `validate_logs.py`:
+- Điểm `validate_logs.py`: 100/100
 - Tổng số traces:
-- Số PII leak còn lại:
+- Số PII leak còn lại: 0
 - Link/đường dẫn dashboard:
 
 ## 3. Logging và tracing
 
-- Evidence correlation ID:
-- Evidence PII redaction:
+- Evidence correlation ID: Tất cả các API request đều được gán `correlation_id` chuẩn dạng `req-<8-char-hex>` (ví dụ: `req-03c236aa`) truyền qua response header `x-request-id` và ghi đồng bộ trong `data/logs.jsonl`.
+- Evidence PII redaction: Đã kích hoạt processor `scrub_event` trong `logging_config.py` và hàm `scrub_obj` trong `pii.py`. Tất cả Email, SĐT, CCCD, Số thẻ được thay thế bằng các token dạng `[REDACTED_EMAIL]`, `[REDACTED_PHONE_VN]`, v.v.
 - Evidence trace waterfall:
 - Giải thích một span đáng chú ý:
 
