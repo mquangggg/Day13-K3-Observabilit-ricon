@@ -53,13 +53,13 @@
 
 ## 6. Điều tra challenge
 
-- Challenge ID:
-- Triệu chứng từ metrics:
-- Trace ID liên quan:
-- Log line/correlation ID liên quan:
-- Root cause:
-- Fix action:
-- Preventive measure:
+- Challenge ID: day13-k3-observability-v1
+- Triệu chứng từ metrics: P95 Latency của feature `refund` bùng nổ lên tới 12,500ms - 15,200ms (vượt xa ngưỡng SLO 3,000ms).
+- Trace ID liên quan: `req-8bc9c46b`, `req-2ae12e55`, `req-ebae43d7`, `req-f646b30a`, `req-59fc8772`
+- Log line/correlation ID liên quan: `req-8bc9c46b` (Latency: 12545.2ms, `user_id_hash`: `026c7a407135`, feature: `refund`)
+- Root cause: Do sự cố mock `rag_slow` (RAG Retrieval Service bị nghẽn/retry lặp lại), khiến thời gian tìm kiếm tài liệu tham khảo cho tính năng `refund` bị kéo dài thêm từ 5,000ms đến 10,000ms cho mỗi request.
+- Fix action: Tắt sự cố mock `rag_slow` bằng cách gửi request POST `/incidents/rag_slow/disable` (hoặc chạy `python scripts/inject_incident.py --scenario rag_slow --disable`), đồng thời tối ưu timeout cho RAG retrieval service xuống 2,000ms.
+- Preventive measure: Cấu hình Circuit Breaker và Fallback mechanism cho RAG Retrieval service (nếu RAG quá 2,000ms thì trả về câu trả lời mặc định hoặc dùng cache thay vì retry lãng phí latency).
 
 ## 7. Đóng góp cá nhân
 
