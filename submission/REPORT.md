@@ -21,7 +21,7 @@
 
 - Evidence correlation ID: Tất cả các API request đều được gán `correlation_id` chuẩn dạng `req-<8-char-hex>` (ví dụ: `req-03c236aa`) truyền qua response header `x-request-id` và ghi đồng bộ trong `data/logs.jsonl`.
 - Evidence PII redaction: Đã kích hoạt processor `scrub_event` trong `logging_config.py` và hàm `scrub_obj` trong `pii.py`. Tất cả Email, SĐT, CCCD, Số thẻ được thay thế bằng các token dạng `[REDACTED_EMAIL]`, `[REDACTED_PHONE_VN]`, v.v.
-- Evidence trace waterfall:
+- Evidence trace waterfall: [trace_waterfall.png](evidence/trace_waterfall.png)
 - Giải thích một span đáng chú ý:
 
 ## 4. Prompt versioning
@@ -67,4 +67,4 @@
 |---|---|---|---|
 | Vũ Minh Quang | Triển khai Correlation ID middleware, PII Redaction & Structured Logging | Commit `272dcba`, PR merge main | Hiểu rõ cơ chế propagation Correlation ID & PII scrubbing trong Structlog |
 | Phạm Trung Kiên (TV2) | Tích hợp Tracing, Prompt Versioning & Rollback | Commit `78f4801`, PR merge main | Cách quản lý Prompt Versioning và truy vết Span trên Langfuse |
-| Quang LN | Cấu hình Alerts, Dashboard Contract & Runbook | Commit `be61e1c`, PR merge main | Thiết lập SLO/Alert thresholds và xây dựng Dashboard contract từ logs.jsonl |
+| Lương Ngọc Quang | Cấu hình Alerts, Dashboard Contract & Runbook | Commit `be61e1c`, PR merge main | Thiết lập SLO/Alert thresholds và xây dựng Dashboard contract từ logs.jsonl |
